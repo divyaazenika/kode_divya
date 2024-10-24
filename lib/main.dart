@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 
 void main() {
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,11 +13,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 231, 205, 195),  
-          foregroundColor: Colors.black,  
+          backgroundColor: Color.fromARGB(255, 231, 205, 195),
+          foregroundColor: Colors.black,
         ),
       ),
-      home: MyHomePage(title: 'Menu makanan khas'),  
+      home: MyHomePage(title: 'Menu makanan khas'),
     );
   }
 }
@@ -39,17 +36,59 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),  
-          onPressed: () {
-          },
+        
+        title: Text(widget.title),
+        centerTitle: true,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage('asset/image/yummy.jpg'), // Ganti dengan path gambar Anda
+              ),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context); // Menutup drawer
+              },
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage('asset/image/settings.jpg'), // Ganti dengan path gambar Anda
+              ),
+              title: Text('Settings'),
+              onTap: () {
+                Navigator.pop(context); // Menutup drawer
+              },
+            ),
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage('asset/image/about.jpg'), // Ganti dengan path gambar Anda
+              ),
+              title: Text('About'),
+              onTap: () {
+                Navigator.pop(context); // Menutup drawer
+              },
+            ),
+          ],
         ),
-        title: Text(widget.title),  
-        centerTitle: true,  
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0), 
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               Row(
@@ -66,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       imageUrl: 'asset/gado-gado.jpg',
                     ),
                   ),
-                  SizedBox(width: 16.0), 
+                  SizedBox(width: 16.0),
                   Flexible(
                     child: _buildRecipeCard(
                       title: 'Sate ayam',
@@ -118,7 +157,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-
   Widget _buildRecipeCard({
     required String title,
     required double rating,
@@ -130,8 +168,8 @@ class _MyHomePageState extends State<MyHomePage> {
     required String imageUrl,
   }) {
     return Card(
-      color: Color.fromARGB(255, 226, 201, 192), 
-      elevation: 2, 
+      color: Color.fromARGB(255, 226, 201, 192),
+      elevation: 2,
       child: Column(
         children: [
           Padding(
@@ -139,26 +177,26 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(sellerImage),  
+                  backgroundImage: AssetImage(sellerImage),
                   radius: 20.0,
                 ),
-                SizedBox(width: 8.0),  
+                SizedBox(width: 8.0),
                 Text(
-                  sellerName,  
+                  sellerName,
                   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
-                Spacer(),  
+                Spacer(),
                 if (isVerified)
-                  Icon(Icons.check_circle, color: Colors.blue, size: 16.0),  
+                  Icon(Icons.check_circle, color: Colors.blue, size: 16.0),
               ],
             ),
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(16.0),
             child: Image.asset(
-              imageUrl,  
-              width: double.infinity,  
-              height: 160.0,  
+              imageUrl,
+              width: double.infinity,
+              height: 160.0,
               fit: BoxFit.cover,
             ),
           ),
@@ -168,27 +206,25 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,  
+                  title,
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 8.0),
-                
                 Row(
                   children: [
-                    Icon(Icons.star, color: Colors.orange),  
-                    Text('$rating'),  
-                    SizedBox(width: 16.0),  
-                    Icon(Icons.timer, color: Colors.grey),  
-                    Text(time), 
+                    Icon(Icons.star, color: Colors.orange),
+                    Text('$rating'),
+                    SizedBox(width: 16.0),
+                    Icon(Icons.timer, color: Colors.grey),
+                    Text(time),
                   ],
                 ),
-                SizedBox(height: 8.0),  
-               
+                SizedBox(height: 8.0),
                 Row(
                   children: [
-                    Icon(Icons.monetization_on, color: Colors.grey, size: 16.0), 
-                    SizedBox(width: 4.0),  
-                    Text(price),  
+                    Icon(Icons.monetization_on, color: Colors.grey, size: 16.0),
+                    SizedBox(width: 4.0),
+                    Text(price),
                   ],
                 ),
               ],
